@@ -1,14 +1,22 @@
 # sendandi
 
-A Clojure library designed to ... well, that part is up to you.
+From icelandic "sendandi" which means "dispatcher".
+
+An abstraction above datalog databases for functions like connections, transactions, and queries. Only Datomic and Datahike is supported.
 
 ## Usage
 
-FIXME
+Include latest version in your dependencies and fire up a REPL:
+
+```clojure
+(require '[sendandi.core :as s])
+```
+
+
 
 ## License
 
-Copyright © 2020 FIXME
+Copyright © 2020 Konrad Kühne
 
 This program and the accompanying materials are made available under the
 terms of the Eclipse Public License 2.0 which is available at
