@@ -104,9 +104,9 @@
   (administer-system [client] (not-supported))
   (list-databases [client arg-map] (not-supported))
   (create-database [client arg-map]
-    (dh/create-database arg-map))
+    (dh/create-database state))
   (delete-database [client arg-map]
-    (dh/delete-database arg-map)))
+    (dh/delete-database state)))
 
 (defrecord DatomicClient [state]
   Connector
