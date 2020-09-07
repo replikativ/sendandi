@@ -1,8 +1,14 @@
 # sendandi
 
-From icelandic "sendandi" which means "dispatcher".
+<a href="https://clojars.org/io.replikativ/sendandi"> <img src="https://img.shields.io/clojars/v/io.replikativ/sendandi.svg" /></a>
 
-An abstraction above datalog databases for functions like connections, transactions, and queries. Only Datomic and Datahike is supported.
+
+From icelandic "sendandi" which means "dispatcher". 
+
+Dispatches on current database configuration and calls the corresponding database functions. Supports functions  like `create-database`, `connect`, `transact`,
+ `q`, etc.  
+ 
+ As of version `0.1.0-SNAPSHOT`, only Datomic and Datahike is supported.
 
 ## Usage
 
