@@ -130,19 +130,33 @@
 (defmulti -q-map (fn [{:keys [args] :as arg-map}] (-> args first class)))
 
 (defmethod -q-map DatahikeDb [arg-map]
-  (dh/q (update-in arg-map [:args] (fn [old] (into [(-> old first :state)] (rest old))))))
+  (dh/q (update-in arg-map [:args] (fn [old] (mapv (fn [arg]
+                                                    (if (= DatahikeDb (type arg))
+                                                      (:state arg)
+                                                      arg)) old)))))
 
 (defmethod -q-map DatomicDb [arg-map]
-  (dc/q (update-in arg-map [:args] (fn [old] (into [(-> old first :state)] (rest old))))))
+  (dc/q (update-in arg-map [:args] (fn [old] (mapv (fn [arg]
+                                                     (if (= DatomicDb (type arg))
+                                                       (:state arg)
+                                                       arg)) old)))))
 
 (defmulti -q (fn [query & args] (-> args first class)))
 
 (defmethod -q DatahikeDb [query & args]
-  (apply dh/q query (-> args first :state) (rest args)))
+  (apply dh/q query (mapv (fn [arg]
+                           (if (= DatahikeDb (type arg))
+                             (:state arg)
+                             arg))
+                         args)))
 
 (defmethod -q DatomicDb [query & args]
-  (apply dc/q query (-> args first :state) (rest args)))
+  (apply dc/q query (mapv (fn [arg]
+                           (if (= DatomicDb (type arg))
+                             (:state arg)
+                             arg)) args) (rest args)))
 
 (defn q
   ([arg-map] (-q-map arg-map))
   ([query & args] (apply -q query args)))
+
