@@ -15,7 +15,6 @@
   {:store {:backend :mem
            :id db-name}})
 
-
 (deftest simple-tx-and-q-comparison
   (let [dh-cfg    (datahike-cfg "dh-tx-q")
         dh-client (s/datahike-client dh-cfg)
@@ -82,8 +81,7 @@
           (let [history-q {:query '[:find ?n ?a ?added
                                     :where
                                     [?e :name ?n _ ?added]
-                                    [?e :age ?a]
-                                    ]
+                                    [?e :age ?a]]
                            :args  []}]
             (testing "as-of database"
               (is (= (into #{}
