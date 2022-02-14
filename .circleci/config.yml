@@ -89,6 +89,12 @@ workflows:
           context: clojars-deploy
           requires:
             - setup
+      - test:
+          context:
+            - clojars-deploy
+            - aws-token
+          requires:
+            - build
       - deploy:
           context:
             - clojars-deploy
@@ -98,7 +104,7 @@ workflows:
               only: main
           requires:
             - tools/format
-            - build
+            - test
       - release:
           context:
             - dockerhub-deploy
