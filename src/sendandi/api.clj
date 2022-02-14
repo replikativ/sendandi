@@ -91,7 +91,7 @@
 
 (defprotocol Creator
   (administer-system [client])
-  (list-databases [client arg-map] )
+  (list-databases [client arg-map])
   (create-database [client arg-map])
   (delete-database  [client arg-map]))
 
@@ -131,9 +131,9 @@
 
 (defmethod -q-map DatahikeDb [arg-map]
   (dh/q (update-in arg-map [:args] (fn [old] (mapv (fn [arg]
-                                                    (if (= DatahikeDb (type arg))
-                                                      (:state arg)
-                                                      arg)) old)))))
+                                                     (if (= DatahikeDb (type arg))
+                                                       (:state arg)
+                                                       arg)) old)))))
 
 (defmethod -q-map DatomicDb [arg-map]
   (dc/q (update-in arg-map [:args] (fn [old] (mapv (fn [arg]
@@ -145,16 +145,16 @@
 
 (defmethod -q DatahikeDb [query & args]
   (apply dh/q query (mapv (fn [arg]
-                           (if (= DatahikeDb (type arg))
-                             (:state arg)
-                             arg))
-                         args)))
+                            (if (= DatahikeDb (type arg))
+                              (:state arg)
+                              arg))
+                          args)))
 
 (defmethod -q DatomicDb [query & args]
   (apply dc/q query (mapv (fn [arg]
-                           (if (= DatomicDb (type arg))
-                             (:state arg)
-                             arg)) args) (rest args)))
+                            (if (= DatomicDb (type arg))
+                              (:state arg)
+                              arg)) args) (rest args)))
 
 (defn q
   ([arg-map] (-q-map arg-map))
