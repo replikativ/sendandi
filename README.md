@@ -8,7 +8,7 @@ From icelandic "sendandi" which means "dispatcher".
 Dispatches on current database configuration and calls the corresponding database functions. Supports functions  like `create-database`, `connect`, `transact`,
  `q`, etc.  
  
- As of version `0.1.0-SNAPSHOT`, only Datomic and Datahike is supported.
+ Currently only Datomic and Datahike is supported.
 
 ## Usage
 
@@ -130,7 +130,7 @@ For an example with datahike include latest version in your dependencies and fir
 
 ## License
 
-Copyright © 2020 Konrad Kühne
+Copyright © 2022 Konrad Kühne
 
 This program and the accompanying materials are made available under the
 terms of the Eclipse Public License 2.0 which is available at
